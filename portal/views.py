@@ -1,21 +1,22 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from .forms import UploadFileForm
+from django.template import RequestContext
+from django.urls import reverse
+from .forms import DocumentForm
+from .models import Document
 
 
 def index(request):
-    form = UploadFileForm()
+    form = DocumentForm()
     if request.method == 'POST':
-        form = UploadFileForm(request.POST, request.FILES)
+        form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            handle_uploaded_file(request.FILES['file'])
-            return HttpResponseRedirect('/success/url/')
-    print(form.as_table())
-    return render(request, 'forms.html', {form: form})
-
-
-def handle_uploaded_file(file):
-    with open('uploads/data_file.csv', 'wb+') as destination:
-        for chunk in file.chunks():
-            destination.write(chunk)
-
+            newdoc = Document(docfile=request.FILES['docfile'])
+            newdoc.save()
+            print(Document.objects.all())
+            return HttpResponseRedirect('')
+    context = {
+        'form': form,
+        'title': 'Form Django is stupid',
+    }
+    return render(request, 'Main.html', context)

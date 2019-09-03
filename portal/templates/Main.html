@@ -108,23 +108,18 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     <div class="w3-row-padding" style="margin:0 -16px">
       <div class="w3-third">
         <h5>Upload File</h5>
-        <form method="post" >
-                  {% csrf_token %}
-                  {{ form.as_table }}
-<!--				  <div>-->
-<!--                      {{ form.title.errors }}-->
-<!--                         <span><label for="{{ form.title.id_for_label}}">Title:<label>*</label></label></span>-->
-<!--                      {{ form.title }}-->
-<!--				  </div>-->
-<!--				  <div>-->
-<!--					{{ form.file.errors }}-->
-<!--                         <span><label for="{{ form.file.id_for_label }}">File:<label>*</label></label></span>-->
-<!--                      {{ form.file }}-->
-<!--				  </div>-->
-				   <fieldset class="account-action">
-				    <input class="btn" type="submit" name="upload" value="Upload">
+        <form action="{% url "portal:index" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
 
-                   </fieldset>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+
+            <p>
+                {{ form.docfile.errors }}
+                {{ form.docfile }}
+            </p>
+
+            <p><input type="submit" value="Upload"/></p>
         </form>
       </div>
       <div class="w3-twothird">

@@ -2,7 +2,12 @@ from django import forms
 
 
 class UploadFileForm(forms.Form):
+    first_name = forms.CharField(max_length=100)
+    file = forms.FileField(required=False)
 
-    first_name = forms.CharField(required=True, label="Title", max_length=20,
-                                 widget=forms.TextInput(attrs={'placeholder': 'File Name'}))
-    file = forms.FileField()
+
+class DocumentForm(forms.Form):
+    docfile = forms.FileField(
+        label='Select a file',
+        help_text='max. 42 megabytes'
+    )

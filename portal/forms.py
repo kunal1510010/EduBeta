@@ -1,13 +1,27 @@
 from django import forms
 
 
-class UploadFileForm(forms.Form):
-    first_name = forms.CharField(max_length=100)
-    file = forms.FileField(required=False)
+class UserForm(forms.Form):
+    user_name = forms.CharField(max_length=20)
+    email_id = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    widgets = {
+        'password': forms.PasswordInput(),
+    }
+
+
+class LoginForm(forms.Form):
+    email_id = forms.EmailField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    widgets = {
+        'password': forms.PasswordInput(),
+    }
 
 
 class DocumentForm(forms.Form):
     docfile = forms.FileField(
-        label='Select a file',
-        help_text='max. 42 megabytes'
+        label='Supported Formats',
+        help_text='CSV'
     )

@@ -1,0 +1,42 @@
+{% load static %}
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static 'portal/js/script.js'%}"></script>
+    <link href="{% static 'portal/css/style.css'%}" rel="stylesheet">
+</head>
+<body>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<form method="post">
+  {% csrf_token %}
+     {% if messages %}
+                         <div class="messages">
+                            {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message}}</p>
+                            {% endfor %}
+                         </div>
+    {% endif %}
+  <label>
+    <p class="label-txt">ENTER YOUR EMAIL</p>
+      <p>{{ form.email_id.errors }}</p>
+    <input type="text" class="input" name="email_id" value="">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">ENTER YOUR PASSWORD</p>
+      <p>{{ form.password.errors }}</p>
+    <input type="password" class="input" name="password" value="">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <button type="submit">Login</button>
+</form>
+</body>
+</html>

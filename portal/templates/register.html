@@ -1,0 +1,43 @@
+{% load static %}
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="{% static 'portal/js/script.js'%}"></script>
+    <link href="{% static 'portal/css/style.css'%}" rel="stylesheet">
+</head>
+<body>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<form method="post">
+  {% csrf_token %}
+  <label>
+    <p class="label-txt">ENTER YOUR USER NAME</p>
+    {{ form.user_name.errors }}
+    <input type="text" class="input" name="user_name" value="">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">ENTER YOUR EMAIL</p>
+    {{ form.email_id.errors }}
+    <input type="text" class="input" name="email_id" value="">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <label>
+    <p class="label-txt">ENTER YOUR PASSWORD</p>
+    {{ form.password.errors }}
+    <input type="password" class="input" name="password" value="">
+    <div class="line-box">
+      <div class="line"></div>
+    </div>
+  </label>
+  <button type="submit">Register</button>
+</form>
+</body>
+</html>
